@@ -1,0 +1,19 @@
+/* Inter Black */
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-Black.woff2') format('woff2'),
+        url('../assets/fonts/Inter-Black.woff') format('woff');
+    font-weight: 900; 
+    font-style: normal;
+    font-display: swap; 
+}
+
+/* Inter Bold */
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter-Bold.woff2') format('woff2'),
+        url('../assets/fonts/Inter-Bold.woff') format('woff');
+    font-weight: 700; 
+    font-style: normal;
+    font-display: swap;
+}

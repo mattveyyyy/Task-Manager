@@ -1,31 +1,22 @@
-import { useState } from 'react'
 
-
+import { darkTheme } from './theme';
+import { TaskItem } from './components/TaskItem/TaskItem'
+import { ThemeProvider } from '@emotion/react';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-        </a>
-        <a href="https://react.dev" target="_blank">
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ThemeProvider theme={darkTheme}>
+    <TaskItem 
+      id='1'
+      title='Test'
+      description='Add filters for priority, status, and assignee to help users find tasks quickly.'
+      category='Test'
+      status='In Progress'
+      priority='Medium'
+      onEdit={(id) => console.log('Editing task:', id)}
+    />
+    </ThemeProvider>
   )
 }
 
