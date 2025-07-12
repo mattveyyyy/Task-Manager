@@ -4,13 +4,18 @@ export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         background: {
-            paper: '#1E1E1E',
-            default: '#121212'
+            default: '#181420', 
+            paper: '#262033'  
         },
         text: {
-            primary: '#FFFFFF',
-            secondary: '#B0B0B0'
-        }
+            primary: '#F0F0F0',     
+            secondary: '#B0B0B0'    
+    },
+        primary: {
+            main: '#9C27B0',        
+            contrastText: '#FFFFFF'
+        },
+        divider: '#2f2a3a'       
     },
     typography: {
         fontFamily: "'Inter', sans-serif",
