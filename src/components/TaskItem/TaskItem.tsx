@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Card,
     CardContent,
@@ -8,7 +7,7 @@ import {
     IconButton,
     Box,
 } from '@mui/material';
-import { Edit, ArrowUp, ArrowDown, CheckCircle2 } from 'lucide-react';
+import { Edit, ArrowUp, ArrowDown, CheckCircle2, Activity } from 'lucide-react';
 import styles from './TaskItem.module.css';
 
 interface TaskItemProps {
@@ -44,7 +43,7 @@ export const TaskItem = ({
     const getPriorityIcon = () => {
         switch (priority) {
             case 'High': return <ArrowUp size={16} />;
-            case 'Medium': return <span className={styles.priorityMediumDot} />;
+            case 'Medium': return <Activity size={16} />;
             case 'Low': return <ArrowDown size={16} />;
             default: return <span className={styles.priorityMediumDot} />;
         }
