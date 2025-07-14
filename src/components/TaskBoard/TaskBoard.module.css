@@ -1,25 +1,37 @@
 .board {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-  padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    padding: 24px;
 }
 
 .column {
-  background-color: #1e1e24;
-  border: 1px solid #2a2a2f;
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  min-height: 400px;
-}
+    background-color: #1e1e24;
+    border: 1px solid #2a2a2f;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    }
 
 .columnTitle {
-  font-size: 18px;
-  font-weight: 600;
-  color: #f0f0f0;
-  margin-bottom: 12px;
-  border-bottom: 1px solid #333;
-  padding-bottom: 4px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 4px;
+}
+
+.todoTitle {
+    color: #f0f0f0; 
+}
+
+.inProgressTitle {
+    color: #3A86FF;
+}
+
+.doneTitle {
+    color: #4CAF50;   
 }

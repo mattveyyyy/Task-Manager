@@ -2,7 +2,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     border-radius: 16px !important;
-    max-width: 300px;
+    max-width: 400px;
     width: 100%;
     min-width: 280px;
 }
@@ -123,3 +123,4 @@
     height: 18px;
     pointer-events: none;
 }
+

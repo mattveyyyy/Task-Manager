@@ -1,23 +1,19 @@
-
-import { darkTheme } from './theme';
-import { TaskItem } from './components/TaskItem/TaskItem'
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import { AddButton } from './components/AddButton/AddButton';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import { Sidebar } from './components/Sidebar/Sidebar';
-import { useState } from 'react';
 import { TaskBoard } from './components/TaskBoard/TaskBoard';
+import { TaskProvider } from './context/TaskContext';
+import { TaskDetails } from './components/TaskDetails/TaskDetails';
 
 function App() {
-  const [collapsed, setCollapsed] = useState(false);
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      {/* <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} /> */}
-        <main>
-          <TaskBoard />
-    <AddButton onClick={() => console.log('Add Task')} />
-        </main>
-    </ThemeProvider>
+      <TaskProvider >
+        <BrowserRouter >
+          <Routes>
+            <Route path="/" element={<TaskBoard />} />
+            <Route path="/task/:id" element={<TaskDetails />} />
+          </Routes>
+        </BrowserRouter>
+      </TaskProvider>
   )
 }
 

@@ -1,5 +1,14 @@
 .taskList {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.taskPlaceholder {
+    height: 108px; 
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: transparent; 
+    pointer-events: none; 
 }

@@ -61,17 +61,17 @@ export const TaskItem = ({
         <Card className={styles.card} variant="outlined">
             <CardContent className={styles.cardContent}>
                 <div className={styles.editIconWrapper}>
-                <IconButton 
-                    aria-label="edit"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        onEdit(id);
-                    }}
-                    className={styles.editButton}
-                >
-                    <Edit className={styles.editIcon} />
-                </IconButton>
-        </div>
+                    <IconButton 
+                        aria-label="edit"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit(id);
+                        }}
+                        className={styles.editButton}
+                    >
+                        <Edit className={styles.editIcon} />
+                    </IconButton>
+                </div>
                 <Box className={styles.contentWrapper}>
                     <Box className={styles.textContent}>
                         <Typography 
@@ -86,8 +86,6 @@ export const TaskItem = ({
                                 {description}
                             </Typography>
                         )}
-
-                        
                     </Box>
 
 
