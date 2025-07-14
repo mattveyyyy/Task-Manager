@@ -13,7 +13,7 @@ cd Task-Manager
 ```bash
 npm install
 ```
-# или
+или
 ```bash
 yarn
 ```
@@ -22,7 +22,7 @@ yarn
 ```bash
 npm run dev
 ```
-# или
+или
 ```bash
 yarn dev
 ```
