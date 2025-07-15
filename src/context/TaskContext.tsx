@@ -7,11 +7,13 @@ export type Task = {
     category: 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
     status: 'To Do' | 'In Progress' | 'Done';
     priority: 'Low' | 'Medium' | 'High';
+    date: string;
 };
 
 type TaskContextType = {
     tasks: Task[];
     updateTask: (updatedTask: Task) => void;
+    deleteTask: (id: string) => void;
 };
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -24,6 +26,7 @@ const initialTasks: Task[] = [
         category: 'Bug',
         status: 'To Do',
         priority: 'High',
+        date: "2025-07-14T10:30:00"
     },
     {
         id: '2',
@@ -32,6 +35,7 @@ const initialTasks: Task[] = [
         category: 'Feature',
         status: 'In Progress',
         priority: 'Medium',
+        date: "2025-07-14T10:30:00"
     },
     {
         id: '3',
@@ -40,6 +44,7 @@ const initialTasks: Task[] = [
         category: 'Documentation',
         status: 'Done',
         priority: 'Low',
+        date: "2025-07-14T10:30:00"
     },
     {
         id: '4',
@@ -48,6 +53,7 @@ const initialTasks: Task[] = [
         category: 'Refactor',
         status: 'To Do',
         priority: 'Medium',
+        date: "2025-07-14T10:30:00"
     },
     {
         id: '5',
@@ -56,6 +62,7 @@ const initialTasks: Task[] = [
         category: 'Test',
         status: 'In Progress',
         priority: 'High',
+        date: "2025-07-14T10:30:00"
     },
     {
         id: '6',
@@ -63,6 +70,7 @@ const initialTasks: Task[] = [
         category: 'Bug',
         status: 'Done',
         priority: 'Low',
+        date: "2025-07-14T10:30:00"
     },
     {
         id: '7',
@@ -71,6 +79,7 @@ const initialTasks: Task[] = [
         category: 'Test',
         status: 'In Progress',
         priority: 'Medium',
+        date: "2025-07-14T10:30:00"
     },
 ];
 
@@ -83,8 +92,12 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         );
     };
 
+    const deleteTask = (id: string) => {
+        setTasks((prev) => prev.filter((task) => task.id !== id));
+    }
+
     return (
-        <TaskContext.Provider value={{ tasks, updateTask }}>
+        <TaskContext.Provider value={{ tasks, updateTask, deleteTask }}>
         {children}
         </TaskContext.Provider>
     );

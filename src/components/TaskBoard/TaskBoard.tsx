@@ -5,7 +5,7 @@ import { useTaskContext, type Task } from '../../context/TaskContext';
 import { DragDropContext, type DropResult } from '@hello-pangea/dnd';
 
 export const TaskBoard = () => {
-    const { tasks, updateTask } = useTaskContext();
+    const { tasks, updateTask, deleteTask } = useTaskContext();
     const navigate = useNavigate();
 
     const columns = [
@@ -17,6 +17,10 @@ export const TaskBoard = () => {
     const handleEdit = (id: string) => {
         navigate(`/task/${id}`);
     };
+
+    const handleDelete = (id: string) => {
+        deleteTask(id);
+    }
 
     const onDragEnd = (result: DropResult) => {
         const { source, destination, draggableId } = result;
@@ -45,7 +49,7 @@ export const TaskBoard = () => {
             return (
                 <div key={col.droppableId} className={styles.column}>
                 <h2 className={styles.columnTitle}>{col.title}</h2>
-                <TaskList droppableId={col.droppableId} tasks={filteredTasks} onEdit={handleEdit} />
+                <TaskList droppableId={col.droppableId} tasks={filteredTasks} onEdit={handleEdit} onDelete={handleDelete}/>
                 </div>
             );
             })}
@@ -53,3 +57,5 @@ export const TaskBoard = () => {
         </DragDropContext>
     );
 };
+
+

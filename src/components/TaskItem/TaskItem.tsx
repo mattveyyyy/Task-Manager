@@ -7,7 +7,7 @@ import {
     IconButton,
     Box,
 } from '@mui/material';
-import { Edit, ArrowUp, ArrowDown, CheckCircle2, Activity } from 'lucide-react';
+import { Edit, ArrowUp, ArrowDown, CheckCircle2, Activity, Trash } from 'lucide-react';
 import styles from './TaskItem.module.css';
 
 interface TaskItemProps {
@@ -17,7 +17,9 @@ interface TaskItemProps {
     category: 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
     status: 'To Do' | 'In Progress' | 'Done';
     priority: 'Low' | 'Medium' | 'High';
+    date: string;
     onEdit(id: string): void;
+    onDelete(id: string): void;
 }
 
 export const TaskItem = ({
@@ -27,7 +29,9 @@ export const TaskItem = ({
     category,
     status,
     priority,
-    onEdit
+    date,
+    onEdit,
+    onDelete
 }: TaskItemProps) => {
     const getCategoryColor = () => {
         switch (category) {
@@ -58,18 +62,22 @@ export const TaskItem = ({
     };
 
     return (
-        <Card className={styles.card} variant="outlined">
+        <Card 
+            className={styles.card} 
+            variant="outlined" 
+            onClick={() => onEdit(id)}
+        >
             <CardContent className={styles.cardContent}>
-                <div className={styles.editIconWrapper}>
+                <div className={styles.deleteIconWrapper}>
                     <IconButton 
-                        aria-label="edit"
+                        aria-label="delete"
                         onClick={(e) => {
                             e.stopPropagation();
-                            onEdit(id);
+                            onDelete(id);
                         }}
-                        className={styles.editButton}
+                        className={styles.deleteButton}
                     >
-                        <Edit className={styles.editIcon} />
+                        <Trash className={styles.deleteIcon} />
                     </IconButton>
                 </div>
                 <Box className={styles.contentWrapper}>
@@ -112,7 +120,12 @@ export const TaskItem = ({
                         />
                     </Stack>
                 </Box>
-                
+                    <Box className={styles.footer}>
+                        <Typography variant="caption" className={styles.date}>
+                            {new Date(date).toLocaleDateString()}
+                        </Typography>
+                    </Box>
+
             </CardContent>
         </Card>
     );

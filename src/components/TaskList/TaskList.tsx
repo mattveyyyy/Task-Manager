@@ -9,15 +9,17 @@ export interface Task {
     category: 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
     status: 'To Do' | 'In Progress' | 'Done';
     priority: 'Low' | 'Medium' | 'High';
+    date: string;
 }
 
 interface TaskListProps {
     tasks: Task[];
     onEdit: (id: string) => void;
+    onDelete: (id: string) => void;
     droppableId: string;
     }
 
-export const TaskList = ({ tasks, onEdit, droppableId }: TaskListProps) => {
+export const TaskList = ({ tasks, onEdit, onDelete, droppableId }: TaskListProps) => {
     return (
         <Droppable droppableId={droppableId}>
         {(provided, snapshot) => (
@@ -36,7 +38,7 @@ export const TaskList = ({ tasks, onEdit, droppableId }: TaskListProps) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     >
-                    <TaskItem {...task} onEdit={onEdit} />
+                    <TaskItem {...task} onEdit={onEdit} onDelete={onDelete}/>
                     </div>
                 )}
                 </Draggable>
