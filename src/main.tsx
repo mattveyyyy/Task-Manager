@@ -4,14 +4,15 @@ import '../public/styles/font.css'
 import App from './App.tsx'
 import { darkTheme } from './theme.ts'
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import { AddButton } from './components/AddButton/AddButton.tsx'
+import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={darkTheme} >
-      <CssBaseline />
-      <App />
-      <AddButton onClick={() => console.log('')}/>
-    </ThemeProvider>
+    <BrowserRouter >
+      <ThemeProvider theme={darkTheme} >
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
   </StrictMode>,
 )

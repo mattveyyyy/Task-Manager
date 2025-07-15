@@ -1,20 +1,17 @@
 .container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 64px auto; /* добавляет отступ сверху и снизу */
     background-color: #2c2c2c;
     padding: 48px;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
     width: 640px;
     max-width: 95%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #eee;
     box-sizing: border-box;
 }
 
-h2 {
+h5 {
     margin-bottom: 28px;
     text-align: center;
     color: #f0f0f0;

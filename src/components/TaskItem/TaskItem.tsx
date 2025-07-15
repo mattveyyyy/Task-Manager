@@ -7,7 +7,7 @@ import {
     IconButton,
     Box,
 } from '@mui/material';
-import { Edit, ArrowUp, ArrowDown, CheckCircle2, Activity, Trash } from 'lucide-react';
+import { ArrowUp, ArrowDown, CheckCircle2, Activity, Trash } from 'lucide-react';
 import styles from './TaskItem.module.css';
 
 interface TaskItemProps {
