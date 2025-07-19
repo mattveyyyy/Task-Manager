@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@/styles/font.css';
+import '../styles/font.css';
 import App from '@/app/App';
 import { darkTheme } from '@/app/theme';
 import { ThemeProvider, CssBaseline } from '@mui/material';
