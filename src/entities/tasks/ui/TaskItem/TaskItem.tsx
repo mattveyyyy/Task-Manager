@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { ArrowUp, ArrowDown, CheckCircle2, Activity, Trash } from 'lucide-react';
 import styles from './TaskItem.module.css';
-import type { TaskItemProps } from '../../model/types';
+import type { TaskItemProps } from '@entities/tasks/model/types';
 
 
 export const TaskItem = ({

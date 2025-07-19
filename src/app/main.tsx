@@ -1,11 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '../styles/font.css';
-import App from './App.tsx';
-import { darkTheme } from './theme.ts';
+import '@/styles/font.css';
+import App from '@/app/App';
+import { darkTheme } from '@/app/theme';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './store.ts';
+import { store } from '@/app/store';
 import { Provider } from 'react-redux';
 
 

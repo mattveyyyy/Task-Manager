@@ -8,7 +8,7 @@ import {
     Typography,
 } from '@mui/material';
 import styles from './TaskForm.module.css';
-import type { Task, TaskFormProps } from '../../../../entities/tasks/model/types';
+import type { Task, TaskFormProps } from '@entities/tasks/model/types';
 import type { SelectChangeEvent } from '@mui/material';
 
 export const TaskForm = ({ initialData, onSubmit, onCancel }: TaskFormProps) => {

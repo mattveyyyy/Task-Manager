@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import { TaskBoardPage } from '../pages/TaskBoardPage/TaskBoardPage.tsx';
-import { EditTaskPage } from '../pages/EditTaskPage/EditTaskPage.tsx';
-import { NewTaskPage } from '../pages/NewTaskPage/NewTaskPage.tsx';
+import { TaskBoardPage } from '@pages/TaskBoardPage/TaskBoardPage';
+import { EditTaskPage } from '@pages/EditTaskPage/EditTaskPage';
+import { NewTaskPage } from '@pages/NewTaskPage/NewTaskPage';
 
 function App() {
   return (

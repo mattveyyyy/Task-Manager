@@ -1,7 +1,7 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
-import { TaskItem } from '../TaskItem/TaskItem';
+import { TaskItem } from '@entities/tasks/ui/TaskItem/TaskItem';
 import styles from './TaskList.module.css';
-import { type TaskListProps } from '../../model/types';
+import { type TaskListProps } from '@entities/tasks/model/types';
 
 
 
