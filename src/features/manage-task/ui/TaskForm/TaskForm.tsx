@@ -8,14 +8,8 @@ import {
     Typography,
 } from '@mui/material';
 import styles from './TaskForm.module.css';
-import type { Task } from '../../slices/TaskSlice';
+import type { Task, TaskFormProps } from '../../../../entities/tasks/model/types';
 import type { SelectChangeEvent } from '@mui/material';
-
-interface TaskFormProps {
-    initialData?: Task;
-    onSubmit: (task: Task) => void;
-    onCancel: () => void;
-}
 
 export const TaskForm = ({ initialData, onSubmit, onCancel }: TaskFormProps) => {
     const [form, setForm] = useState<Task>(() => {

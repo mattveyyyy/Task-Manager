@@ -1,23 +1,9 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { TaskItem } from '../TaskItem/TaskItem';
 import styles from './TaskList.module.css';
+import { type TaskListProps } from '../../model/types';
 
-export interface Task {
-    id: string;
-    title: string;
-    description?: string;
-    category: 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
-    status: 'To Do' | 'In Progress' | 'Done';
-    priority: 'Low' | 'Medium' | 'High';
-    date: string;
-}
 
-interface TaskListProps {
-    tasks: Task[];
-    onEdit: (id: string) => void;
-    onDelete: (id: string) => void;
-    droppableId: string;
-    }
 
 export const TaskList = ({ tasks, onEdit, onDelete, droppableId }: TaskListProps) => {
     return (

@@ -9,18 +9,8 @@ import {
 } from '@mui/material';
 import { ArrowUp, ArrowDown, CheckCircle2, Activity, Trash } from 'lucide-react';
 import styles from './TaskItem.module.css';
+import type { TaskItemProps } from '../../model/types';
 
-interface TaskItemProps {
-    id: string;
-    title: string;
-    description?: string;
-    category: 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
-    status: 'To Do' | 'In Progress' | 'Done';
-    priority: 'Low' | 'Medium' | 'High';
-    date: string;
-    onEdit(id: string): void;
-    onDelete(id: string): void;
-}
 
 export const TaskItem = ({
     id,

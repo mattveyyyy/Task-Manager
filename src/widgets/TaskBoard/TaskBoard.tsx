@@ -1,8 +1,9 @@
-import { TaskList } from '../TaskList/TaskList';
+import { TaskList } from '../../entities/tasks/ui/TaskList/TaskList';
 import styles from './TaskBoard.module.css';
 import { useNavigate } from 'react-router-dom';
-import { type Task, updateTask, deleteTask, selectTasks } from '../../slices/TaskSlice';
-import {type AppDispatch } from '../../store/store';
+import { updateTask, deleteTask, selectTasks } from '../../entities/tasks/model/taskSlice';
+import { type Task } from '../../entities/tasks/model/types';
+import {type AppDispatch } from '../../app/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { DragDropContext, type DropResult } from '@hello-pangea/dnd';
 

@@ -1,8 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTask, selectTasks } from '../slices/TaskSlice';
-import { type AppDispatch } from '../store/store';
-import { TaskForm } from '../components/TaskForm/TaskForm';
+import { updateTask, selectTasks } from '../../entities/tasks/model/taskSlice'
+import { type AppDispatch } from '../../app/store';
+import { TaskForm } from '../../features/manage-task/ui/TaskForm/TaskForm';
+import type { Task } from '../../entities/tasks/model/types';
 
 export const EditTaskPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -16,7 +17,7 @@ export const EditTaskPage = () => {
     return (
         <TaskForm
         initialData={task}
-        onSubmit={(updatedTask) => {
+        onSubmit={(updatedTask: Task) => {
             dispatch(updateTask(updatedTask));
             navigate('/');
         }}

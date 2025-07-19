@@ -1,15 +1,6 @@
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
-import {tasks} from '../data/tasks'
-
-export type Task = {
-    id: string;
-    title: string;
-    description?: string;
-    category: 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
-    status: 'To Do' | 'In Progress' | 'Done';
-    priority: 'Low' | 'Medium' | 'High';
-    date: string;
-};
+import { tasks } from './tasks';
+import { type Task } from './types';
 
 interface TaskListState {
     tasks: Task[]
@@ -23,7 +14,7 @@ const taskSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        addTask: (state, action: PayloadAction<Task>) => {
+        createTask: (state, action: PayloadAction<Task>) => {
                 state.tasks.push(action.payload);
             },
         updateTask: (state, action: PayloadAction<Task>) => {
@@ -45,5 +36,5 @@ const taskSlice = createSlice({
 )
 
 export const {selectTasks} = taskSlice.selectors;
-export const {addTask, updateTask, deleteTask} = taskSlice.actions;
+export const {createTask, updateTask, deleteTask} = taskSlice.actions;
 export default taskSlice.reducer;

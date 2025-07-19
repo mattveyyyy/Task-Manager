@@ -1,4 +1,4 @@
-import type { Task } from "../slices/TaskSlice";
+import { type Task } from "./types";
 
 export const tasks: Task[] = [
     {
