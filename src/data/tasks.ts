@@ -1,25 +1,6 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import type { Task } from "../slices/TaskSlice";
 
-export type Task = {
-    id: string;
-    title: string;
-    description?: string;
-    category: 'Bug' | 'Feature' | 'Documentation' | 'Refactor' | 'Test';
-    status: 'To Do' | 'In Progress' | 'Done';
-    priority: 'Low' | 'Medium' | 'High';
-    date: string;
-};
-
-type TaskContextType = {
-    tasks: Task[];
-    updateTask: (updatedTask: Task) => void;
-    deleteTask: (id: string) => void;
-    addTask: (newTask: Task) => void;
-};
-
-const TaskContext = createContext<TaskContextType | undefined>(undefined);
-
-const initialTasks: Task[] = [
+export const tasks: Task[] = [
     {
         id: '1',
         title: 'Fix login issue',
@@ -83,34 +64,3 @@ const initialTasks: Task[] = [
         date: "2025-07-14T10:30:00"
     },
 ];
-
-export const TaskProvider = ({ children }: { children: ReactNode }) => {
-    const [tasks, setTasks] = useState<Task[]>(initialTasks);
-
-    const updateTask = (updatedTask: Task) => {
-        setTasks((prev) =>
-        prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
-        );
-    };
-
-    const deleteTask = (id: string) => {
-        setTasks((prev) => prev.filter((task) => task.id !== id));
-    }
-
-    const addTask = (newTask: Task) => {
-        setTasks((prev) => [...prev, newTask]);
-    };
-
-
-    return (
-        <TaskContext.Provider value={{ tasks, updateTask, deleteTask, addTask }}>
-        {children}
-        </TaskContext.Provider>
-    );
-    };
-
-export const useTaskContext = () => {
-    const context = useContext(TaskContext);
-        if (!context) throw new Error('useTaskContext must be used within a TaskProvider');
-    return context;
-};

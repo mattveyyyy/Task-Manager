@@ -8,7 +8,7 @@ import {
     Typography,
 } from '@mui/material';
 import styles from './TaskForm.module.css';
-import type { Task } from '../../context/TaskContext';
+import type { Task } from '../../slices/TaskSlice';
 import type { SelectChangeEvent } from '@mui/material';
 
 interface TaskFormProps {

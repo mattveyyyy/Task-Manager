@@ -1,11 +1,14 @@
 import { TaskList } from '../TaskList/TaskList';
 import styles from './TaskBoard.module.css';
 import { useNavigate } from 'react-router-dom';
-import { useTaskContext, type Task } from '../../context/TaskContext';
+import { type Task, updateTask, deleteTask, selectTasks } from '../../slices/TaskSlice';
+import {type AppDispatch } from '../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
 import { DragDropContext, type DropResult } from '@hello-pangea/dnd';
 
 export const TaskBoard = () => {
-    const { tasks, updateTask, deleteTask } = useTaskContext();
+    const tasks = useSelector(selectTasks);
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     const columns = [
@@ -19,7 +22,7 @@ export const TaskBoard = () => {
     };
 
     const handleDelete = (id: string) => {
-        deleteTask(id);
+        dispatch(deleteTask(id))
     }
 
     const onDragEnd = (result: DropResult) => {
@@ -38,7 +41,7 @@ export const TaskBoard = () => {
         const newStatus = destination.droppableId as Task['status'];
         const updatedTask = { ...draggedTask, status: newStatus };
 
-        updateTask(updatedTask);
+        dispatch(updateTask(updatedTask))
     };
 
     return (

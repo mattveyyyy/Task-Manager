@@ -1,10 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useTaskContext } from '../context/TaskContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateTask, selectTasks } from '../slices/TaskSlice';
+import { type AppDispatch } from '../store/store';
 import { TaskForm } from '../components/TaskForm/TaskForm';
 
 export const EditTaskPage = () => {
     const { id } = useParams<{ id: string }>();
-    const { tasks, updateTask } = useTaskContext();
+    const tasks = useSelector(selectTasks);
+    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate();
 
     const task = tasks.find((task) => task.id === id);
@@ -14,7 +17,7 @@ export const EditTaskPage = () => {
         <TaskForm
         initialData={task}
         onSubmit={(updatedTask) => {
-            updateTask(updatedTask);
+            dispatch(updateTask(updatedTask));
             navigate('/');
         }}
         onCancel={() => navigate('/')}
