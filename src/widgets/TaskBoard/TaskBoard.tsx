@@ -36,7 +36,7 @@ export const TaskBoard = () => {
         )
         return;
 
-        const draggedTask = tasks.find((t) => t.id === draggableId);
+        const draggedTask = tasks.find((t: Task) => t.id === draggableId);
         if (!draggedTask) return;
 
         const newStatus = destination.droppableId as Task['status'];
@@ -49,7 +49,7 @@ export const TaskBoard = () => {
         <DragDropContext onDragEnd={onDragEnd}>
         <div className={styles.board}>
             {columns.map((col) => {
-            const filteredTasks = tasks.filter((task) => task.status === col.status);
+            const filteredTasks = tasks.filter((task: Task) => task.status === col.status);
             return (
                 <div key={col.droppableId} className={styles.column}>
                 <h2 className={styles.columnTitle}>{col.title}</h2>

@@ -28,39 +28,4 @@ export const tasks: Task[] = [
         priority: 'Low',
         date: "2025-07-14T10:30:00"
     },
-    {
-        id: '4',
-        title: 'Refactor auth module',
-        description: 'Simplify code structure and remove duplication.',
-        category: 'Refactor',
-        status: 'To Do',
-        priority: 'Medium',
-        date: "2025-07-14T10:30:00"
-    },
-    {
-        id: '5',
-        title: 'Write unit tests',
-        description: 'Increase coverage for task module.',
-        category: 'Test',
-        status: 'In Progress',
-        priority: 'High',
-        date: "2025-07-14T10:30:00"
-    },
-    {
-        id: '6',
-        title: 'Fix broken link on landing page',
-        category: 'Bug',
-        status: 'Done',
-        priority: 'Low',
-        date: "2025-07-14T10:30:00"
-    },
-    {
-        id: '7',
-        title: 'Test',
-        description: 'Add filters for priority, status, and assignee to help users find tasks quickly.',
-        category: 'Test',
-        status: 'In Progress',
-        priority: 'Medium',
-        date: "2025-07-14T10:30:00"
-    },
 ];

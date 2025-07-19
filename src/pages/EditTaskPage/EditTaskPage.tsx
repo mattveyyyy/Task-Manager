@@ -11,7 +11,7 @@ export const EditTaskPage = () => {
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate();
 
-    const task = tasks.find((task) => task.id === id);
+    const task = tasks.find((task: Task) => task.id === id);
     if (!task) return <p>Task not found</p>;
 
     return (
