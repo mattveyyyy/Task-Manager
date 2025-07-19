@@ -7,6 +7,7 @@ import type { AppDispatch } from '@app/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { DragDropContext, type DropResult } from '@hello-pangea/dnd';
 
+// Fix drag-n-drop 
 export const TaskBoard = () => {
     const tasks = useSelector(selectTasks);
     const dispatch = useDispatch<AppDispatch>();
