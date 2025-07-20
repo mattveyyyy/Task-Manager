@@ -7,7 +7,7 @@
 }
 
 .drawerPaper {
-    background-color: #1e1e2f;
+    background-color: #262033;
     border-right: 1px solid #2e2e40;
     width: 240px;
 }
@@ -18,7 +18,7 @@
 
 .drawerPaperCollapsed {
     width: 84px;
-    background-color: #1e1e2f;
+    background-color: #262033;
     border-right: 1px solid #2e2e40;
 }
 
@@ -26,9 +26,9 @@
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    padding: 16px;
+    padding: 0 16px;
     border-bottom: 1px solid #2e2e40;
-    min-height: 64px;
+    height: 84px;
     position: relative;
 }
 
@@ -36,17 +36,20 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    height: 100%;
 }
 
 .logoImage {
     width: 32px;
     height: 32px;
+    align-self: center;
 }
 
 .logoText {
     color: #ffffff;
     font-weight: bold;
     font-size: 20px;
+    line-height: 64px;
 }
 
 .logoAccent {

@@ -1,0 +1,41 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 84px;
+    background-color: #262033; 
+    border-bottom: 1px solid #2e2e40;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.pageTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.newTaskBtn {
+    background-color: #9c27b0; 
+    color: #fff;
+    font-weight: 500;
+    text-transform: none;
+    text-transform: none !important;
+}
+
+.iconBtn {
+    color: #aaa;
+}
