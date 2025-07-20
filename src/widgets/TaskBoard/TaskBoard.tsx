@@ -1,17 +1,22 @@
 import { TaskList } from '@entities/tasks/ui/TaskList/TaskList';
 import styles from './TaskBoard.module.css';
 import { useNavigate } from 'react-router-dom';
-import { updateTask, deleteTask, selectTasks } from '@entities/tasks/model/taskSlice';
+import { updateTask, deleteTask, selectTasks, fetchTasks } from '@entities/tasks/model/taskSlice';
 import type { Task } from '@entities/tasks/model/types';
 import type { AppDispatch } from '@app/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { DragDropContext, type DropResult } from '@hello-pangea/dnd';
+import { useEffect } from 'react';
 
 // Fix drag-n-drop 
 export const TaskBoard = () => {
     const tasks = useSelector(selectTasks);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(fetchTasks());
+    }, [dispatch]);
 
     const columns = [
         { title: 'To Do', status: 'To Do' as Task['status'], droppableId: 'To Do' },
