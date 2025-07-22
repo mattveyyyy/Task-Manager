@@ -85,6 +85,12 @@ ESLint + Prettier — проверка и форматирование кода
 
 Path Aliases — удобные импорт-пути (например, @entities, @features)
 
+Formik
+
+Zod
+
+Storybook
+
 ## Описание архитектуры
 Проект построен с использованием архитектуры Feature-Sliced Design:
 
