@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:4000/api/v1/users';
+export const BASE_URL = '/api/v1/users';
 
 export async function getUsers() {
     const res = await fetch(BASE_URL);

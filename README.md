@@ -91,6 +91,8 @@ Zod
 
 Storybook
 
+React Query (TanStack Query)
+
 ## Описание архитектуры
 Проект построен с использованием архитектуры Feature-Sliced Design:
 

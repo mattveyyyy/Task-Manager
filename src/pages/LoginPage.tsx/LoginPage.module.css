@@ -1,0 +1,58 @@
+.container {
+    margin: 64px auto;
+    background-color: #2c2c2c;
+    padding: 48px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+    width: 400px;
+    max-width: 95%;
+    font-family: 'Inter', sans-serif;
+    color: #eee;
+    box-sizing: border-box;
+}
+
+h5 {
+    margin-bottom: 28px;
+    text-align: center;
+    color: #f0f0f0;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.formGroup label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ccc;
+    font-size: 15px;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.buttonGroup button {
+    flex: 1;
+    padding: 12px 0;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    color: #fff;
+    font-family: inherit;
+    max-width: 150px;
+}
+
+.buttonGroup button:hover {
+    background-color: #7b1fa2;
+}

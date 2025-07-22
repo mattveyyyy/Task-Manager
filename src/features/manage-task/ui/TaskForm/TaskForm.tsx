@@ -67,7 +67,7 @@ export const TaskForm = ({ initialData, onSubmit, onCancel }: TaskFormProps) => 
                 id="description"
                 name="description"
                 multiline
-                rows={2}
+                rows={1}
                 value={form.description}
                 onChange={handleInputChange}
                 fullWidth
