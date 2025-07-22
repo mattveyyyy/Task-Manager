@@ -21,8 +21,8 @@ import clsx from "clsx"
 import styles from "./Sidebar.module.css"
 
 const navigationItems = [
-    { title: "Home", url: "/home", icon: Home },
-    { title: "Tasks", url: "/", icon: CheckSquare },
+    { title: "Home", url: "/", icon: Home },
+    { title: "Tasks", url: "/tasks", icon: CheckSquare },
     { title: "Profile", url: "/profile", icon: User },
     { title: "Settings", url: "/settings", icon: Settings },
 ]

@@ -11,8 +11,8 @@ export const TaskBoardPage = () => {
 
     return (
         <>
-        <TaskBoard />
-        <AddButton onClick={handleCreateTask} />
+            <TaskBoard />
+            <AddButton onClick={handleCreateTask} />
         </>
     );
 };

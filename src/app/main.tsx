@@ -7,17 +7,21 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from '@/app/store';
 import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const queryClient = new QueryClient();
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter >
-        <ThemeProvider theme={darkTheme} >
-          <CssBaseline />
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <BrowserRouter >
+          <ThemeProvider theme={darkTheme} >
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
   </StrictMode>,
 )
