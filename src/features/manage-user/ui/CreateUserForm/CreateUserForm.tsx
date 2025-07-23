@@ -1,5 +1,6 @@
 import { Formik, Form } from 'formik';
 import { z } from 'zod';
+import {createUser} from '@shared/api/user';
 import {
     TextField,
     FormControlLabel,
@@ -11,6 +12,7 @@ import {
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import styles from './CreateUserForm.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const userSchema = z.object({
   name: z.string().min(1, 'Required').max(64),
@@ -18,14 +20,20 @@ const userSchema = z.object({
   password: z.string().min(1, 'Required'),
   fullName: z.string().min(1, 'Required').max(130),
   email: z.string().email('Invalid email'),
-  birthDate: z.date().optional(),
+  birthDate: z
+    .union([z.date(), z.null()])
+    .optional(),
   telephone: z
     .string()
-    .optional()
-    .refine((val) => !val || /^\+?\d{10,15}$/.test(val), 'Invalid phone number'),
+    .transform((val) => val.trim())
+    .refine(
+      (val) => val === '' || /^\+?\d{10,15}$/.test(val),
+      { message: 'Invalid phone number' }
+    ),
   employment: z.string().optional(),
   userAgreement: z.literal(true, { message: 'You must agree' }),
 });
+
 
 const validateWithZod = (values: any) => {
   const parsed = userSchema.safeParse(values);
@@ -39,6 +47,25 @@ const validateWithZod = (values: any) => {
 };
 
 export function CreateUserForm() {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values: any) => {
+    try {
+      const prepared = {
+        ...values,
+        birthDate: values.birthDate
+          ? new Date(values.birthDate).toISOString()
+          : null,
+      };
+
+      await createUser(prepared);
+        navigate('/');
+      } catch (err: any) {
+        console.error(err);
+        alert('Ошибка при создании пользователя: ' + err.message);
+      }
+  };
+  
   return (
     <div className={styles.container}>
       <h5>Create New User</h5>
@@ -55,13 +82,7 @@ export function CreateUserForm() {
           userAgreement: false,
         }}
         validate={validateWithZod}
-        onSubmit={(values) => {
-          const prepared = {
-            ...values,
-            birthDate: values.birthDate ? new Date(values.birthDate).toISOString() : null,
-          };
-          console.log('Submit:', prepared);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ values, handleChange, errors, touched, setFieldValue }) => (
           <Form>

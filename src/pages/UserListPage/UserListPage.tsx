@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUsers } from '@shared/api/userApi';
+import { getUsers } from '@/shared/api/user';
 import { CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 
 export const UserListPage = () => {

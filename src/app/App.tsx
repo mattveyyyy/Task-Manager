@@ -8,21 +8,27 @@ import { NewTaskPage } from "@pages/NewTaskPage/NewTaskPage";
 import { UserListPage } from "@/pages/UserListPage/UserListPage";
 import { LoginPage } from "@/pages/LoginPage.tsx/LoginPage";
 import { PrivateRoute } from "./PrivateRoute";
+import { CreateUserForm } from "@/features/manage-user/ui/CreateUserForm/CreateUserForm";
+import { login, getCurrentUser } from "@/shared/api/auth";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); 
+
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        await getCurrentUser();
+        setIsAuthenticated(true);
+      } catch {
+        setIsAuthenticated(false);
+      }
+    }
+    checkAuth();
+  }, []);
 
   const handleLogin = async (credentials: { email: string; password: string }) => {
     try {
-      const res = await fetch("/api/v1/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify(credentials),
-      });
-
-      if (!res.ok) throw new Error("Ошибка авторизации");
-
+      await login(credentials);
       setIsAuthenticated(true);
     } catch (err) {
       console.error(err);
@@ -30,9 +36,16 @@ function App() {
     }
   };
 
+  if (isAuthenticated === null) {
+    return <div>Загрузка...</div>;
+  }
+
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage onLogin={handleLogin} isAuthenticated={isAuthenticated} />} />
+      <Route
+        path="/login"
+        element={<LoginPage onLogin={handleLogin} isAuthenticated={isAuthenticated} />}
+      />
 
       <Route element={<Layout />}>
         <Route
@@ -64,6 +77,14 @@ function App() {
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
               <EditTaskPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/user/create"
+          element={
+            <PrivateRoute isAuthenticated={isAuthenticated}>
+              <CreateUserForm />
             </PrivateRoute>
           }
         />

@@ -17,6 +17,7 @@ export async function createUser(data: object) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
+        credentials: 'include',
     });
     if (!res.ok) throw new Error('Ошибка при создании пользователя');
     return res.json();
@@ -27,6 +28,7 @@ export async function updateUser(id: string, data: object) {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
+        credentials: 'include', 
     });
     if (!res.ok) throw new Error('Ошибка при обновлении пользователя');
     return res.json();
