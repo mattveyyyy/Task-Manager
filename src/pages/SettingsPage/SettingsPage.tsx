@@ -3,8 +3,8 @@ import { getCurrentUser } from '@/shared/api/auth';
 import { CircularProgress, Typography } from '@mui/material';
 import { EditUserPage } from '@/pages/EditUserPage/EditUserPage';
 
-export const ProfilePage = () => {
-  const { data:  isLoading, isError } = useQuery({
+export const SettingsPage = () => {
+  const { data: isLoading, isError } = useQuery({
     queryKey: ['currentUser'],
     queryFn: getCurrentUser,
   });

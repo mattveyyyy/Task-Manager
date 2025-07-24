@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Layout } from "./Layout";
 
 import { TaskBoardPage } from "@pages/TaskBoardPage/TaskBoardPage";
@@ -7,106 +7,45 @@ import { EditTaskPage } from "@pages/EditTaskPage/EditTaskPage";
 import { NewTaskPage } from "@pages/NewTaskPage/NewTaskPage";
 import { UserListPage } from "@/pages/UserListPage/UserListPage";
 import { LoginPage } from "@/pages/LoginPage.tsx/LoginPage";
+import {SettingsPage} from "@/pages/SettingsPage/SettingsPage"
 import { PrivateRoute } from "./PrivateRoute";
 import { CreateUserPage } from "@/pages/CreateUserPage/CreateUserPage";
-import { login, getCurrentUser } from "@/shared/api/auth";
 import { EditUserPage } from "@/pages/EditUserPage/EditUserPage";
 import { ProfilePage } from "@/pages/ProfilePage/ProfilePage";
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuth, login } from "@/entities/auth/authSlice";
+import { type RootState, type AppDispatch } from "@/app/store";
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); 
+  const dispatch = useDispatch<AppDispatch>();
+  const { isAuthenticated, loading, error } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    async function checkAuth() {
-      try {
-        await getCurrentUser();
-        setIsAuthenticated(true);
-      } catch {
-        setIsAuthenticated(false);
-      }
-    }
-    checkAuth();
-  }, []);
+    dispatch(checkAuth());
+  }, [dispatch]);
 
   const handleLogin = async (credentials: { email: string; password: string }) => {
-    try {
-      await login(credentials);
-      setIsAuthenticated(true);
-    } catch (err) {
-      console.error(err);
-      alert("Неверные данные");
-    }
+    await dispatch(login(credentials));
   };
 
-  if (isAuthenticated === null) {
-    return <div>Загрузка...</div>;
-  }
+  if (loading) return <div>Загрузка...</div>;
 
   return (
     <Routes>
       <Route
         path="/login"
-        element={<LoginPage onLogin={handleLogin} isAuthenticated={isAuthenticated} />}
+        element={<LoginPage onLogin={handleLogin} isAuthenticated={isAuthenticated} error={error ?? undefined} />}
       />
 
       <Route element={<Layout />}>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
-              <UserListPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/tasks"
-          element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
-              <TaskBoardPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/task/new"
-          element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
-              <NewTaskPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/task/:id"
-          element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
-              <EditTaskPage />
-            </PrivateRoute>
-          }
-        />
-          <Route
-            path="/user/create"
-            element={
-              <PrivateRoute isAuthenticated={isAuthenticated}>
-                <CreateUserPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/user/edit/:id"
-            element={
-              <PrivateRoute isAuthenticated={isAuthenticated}>
-                <EditUserPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute isAuthenticated={isAuthenticated}>
-                <ProfilePage />
-              </PrivateRoute>
-            }
-          />
-
+        <Route path="/" element={<PrivateRoute><UserListPage /></PrivateRoute>} />
+        <Route path="/tasks" element={<PrivateRoute><TaskBoardPage /></PrivateRoute>} />
+        <Route path="/task/new" element={<PrivateRoute><NewTaskPage /></PrivateRoute>} />
+        <Route path="/task/:id" element={<PrivateRoute><EditTaskPage /></PrivateRoute>} />
+        <Route path="/user/create" element={<PrivateRoute><CreateUserPage /></PrivateRoute>} />
+        <Route path="/user/edit/:id" element={<PrivateRoute><EditUserPage /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+        <Route path="/settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>}/>
       </Route>
     </Routes>
   );
