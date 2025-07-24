@@ -21,7 +21,7 @@ export default defineConfig({
   },
   server: {
     allowedHosts: ['localhost'],
-    port: 5173,
+    port: 8080,
     proxy: {
       '/api': {
         changeOrigin: true,
@@ -30,5 +30,6 @@ export default defineConfig({
       },
     },
     strictPort: true, 
+    
   }
 });

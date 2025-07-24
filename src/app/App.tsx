@@ -8,8 +8,10 @@ import { NewTaskPage } from "@pages/NewTaskPage/NewTaskPage";
 import { UserListPage } from "@/pages/UserListPage/UserListPage";
 import { LoginPage } from "@/pages/LoginPage.tsx/LoginPage";
 import { PrivateRoute } from "./PrivateRoute";
-import { CreateUserForm } from "@/features/manage-user/ui/CreateUserForm/CreateUserForm";
+import { CreateUserPage } from "@/pages/CreateUserPage/CreateUserPage";
 import { login, getCurrentUser } from "@/shared/api/auth";
+import { EditUserPage } from "@/pages/EditUserPage/EditUserPage";
+import { ProfilePage } from "@/pages/ProfilePage/ProfilePage";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); 
@@ -80,14 +82,31 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/user/create"
-          element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
-              <CreateUserForm />
-            </PrivateRoute>
-          }
-        />
+          <Route
+            path="/user/create"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <CreateUserPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/user/edit/:id"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <EditUserPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated}>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
+
       </Route>
     </Routes>
   );

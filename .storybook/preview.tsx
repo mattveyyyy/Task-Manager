@@ -1,7 +1,8 @@
+import React from "react";
 import type { Preview } from "@storybook/react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { darkTheme } from "../src/app/theme";
 
 const preview: Preview = {
@@ -9,7 +10,7 @@ const preview: Preview = {
     (Story) => (
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Story />
         </LocalizationProvider>
       </ThemeProvider>

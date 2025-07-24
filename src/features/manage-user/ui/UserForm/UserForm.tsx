@@ -1,18 +1,20 @@
 import { Formik, Form } from 'formik';
 import { z } from 'zod';
-import {createUser} from '@shared/api/user';
 import {
-    TextField,
-    FormControlLabel,
-    Checkbox,
-    Select,
-    MenuItem,
-    FormControl,
-    Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Select,
+  MenuItem,
+  FormControl,
+  Button,
+  Typography,
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import styles from './CreateUserForm.module.css';
-import { useNavigate } from 'react-router-dom';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+import styles from './UserForm.module.css';
 
 const userSchema = z.object({
   name: z.string().min(1, 'Required').max(64),
@@ -20,20 +22,14 @@ const userSchema = z.object({
   password: z.string().min(1, 'Required'),
   fullName: z.string().min(1, 'Required').max(130),
   email: z.string().email('Invalid email'),
-  birthDate: z
-    .union([z.date(), z.null()])
-    .optional(),
+  birthDate: z.union([z.date(), z.null()]).optional(),
   telephone: z
     .string()
-    .transform((val) => val.trim())
-    .refine(
-      (val) => val === '' || /^\+?\d{10,15}$/.test(val),
-      { message: 'Invalid phone number' }
-    ),
+    .regex(/^\+?\d{10,15}$/, 'Invalid phone number')
+    .optional(),
   employment: z.string().optional(),
   userAgreement: z.literal(true, { message: 'You must agree' }),
 });
-
 
 const validateWithZod = (values: any) => {
   const parsed = userSchema.safeParse(values);
@@ -46,45 +42,40 @@ const validateWithZod = (values: any) => {
   return errors;
 };
 
-export function CreateUserForm() {
-  const navigate = useNavigate();
+interface UserFormProps {
+  initialData?: any;
+  onSubmit: (userData: any) => void;
+  onCancel: () => void;
+}
 
-  const handleSubmit = async (values: any) => {
-    try {
-      const prepared = {
-        ...values,
-        birthDate: values.birthDate
-          ? new Date(values.birthDate).toISOString()
-          : null,
-      };
-
-      await createUser(prepared);
-        navigate('/');
-      } catch (err: any) {
-        console.error(err);
-        alert('Ошибка при создании пользователя: ' + err.message);
-      }
-  };
-  
+export const UserForm = ({ initialData, onSubmit, onCancel }: UserFormProps) => {
   return (
     <div className={styles.container}>
-      <h5>Create New User</h5>
+      <Typography variant="h5">
+        {initialData ? 'Edit User' : 'Create New User'}
+      </Typography>
       <Formik
         initialValues={{
-          name: '',
-          surName: '',
-          password: '',
-          fullName: '',
-          email: '',
-          birthDate: null,
-          telephone: '',
-          employment: '',
-          userAgreement: false,
+          name: initialData?.name ?? '',
+          surName: initialData?.surName ?? '',
+          password: initialData?.password ?? '',
+          fullName: initialData?.fullName ?? '',
+          email: initialData?.email ?? '',
+          birthDate: initialData?.birthDate ? new Date(initialData.birthDate) : null,
+          telephone: initialData?.telephone ?? '',
+          employment: initialData?.employment ?? '',
+          userAgreement: initialData?.userAgreement ?? false,
         }}
         validate={validateWithZod}
-        onSubmit={handleSubmit}
+        onSubmit={(values) => {
+          const prepared = {
+            ...values,
+            birthDate: values.birthDate ? new Date(values.birthDate).toISOString() : null,
+          };
+          onSubmit(prepared);
+        }}
       >
-        {({ values, handleChange, errors, touched, setFieldValue }) => (
+        {({ values, handleChange, setFieldValue, touched, errors }) => (
           <Form>
             <div className={styles.formGroup}>
               <label>Name *</label>
@@ -96,7 +87,7 @@ export function CreateUserForm() {
                   setFieldValue('fullName', `${e.target.value} ${values.surName}`);
                 }}
                 error={!!touched.name && !!errors.name}
-                helperText={touched.name && errors.name}
+                helperText={touched.name && errors.name as string}
                 fullWidth
                 variant="standard"
               />
@@ -112,7 +103,7 @@ export function CreateUserForm() {
                   setFieldValue('fullName', `${values.name} ${e.target.value}`);
                 }}
                 error={!!touched.surName && !!errors.surName}
-                helperText={touched.surName && errors.surName}
+                helperText={touched.surName && errors.surName as string}
                 fullWidth
                 variant="standard"
               />
@@ -126,7 +117,7 @@ export function CreateUserForm() {
                 value={values.password}
                 onChange={handleChange}
                 error={!!touched.password && !!errors.password}
-                helperText={touched.password && errors.password}
+                helperText={touched.password && errors.password as string}
                 fullWidth
                 variant="standard"
               />
@@ -139,7 +130,7 @@ export function CreateUserForm() {
                 value={values.fullName}
                 onChange={handleChange}
                 error={!!touched.fullName && !!errors.fullName}
-                helperText={touched.fullName && errors.fullName}
+                helperText={touched.fullName && errors.fullName as string}
                 fullWidth
                 variant="standard"
               />
@@ -152,7 +143,7 @@ export function CreateUserForm() {
                 value={values.email}
                 onChange={handleChange}
                 error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
+                helperText={touched.email && errors.email as string}
                 fullWidth
                 variant="standard"
               />
@@ -160,10 +151,14 @@ export function CreateUserForm() {
 
             <div className={styles.formGroup}>
               <label>Birth Date</label>
-              <DatePicker
-                value={values.birthDate}
-                onChange={(newValue) => setFieldValue('birthDate', newValue)}
-              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  value={values.birthDate ? dayjs(values.birthDate) : null}
+                  onChange={(newValue) =>
+                    setFieldValue('birthDate', newValue ? newValue.toDate() : null)
+                  }
+                />
+              </LocalizationProvider>
             </div>
 
             <div className={styles.formGroup}>
@@ -173,7 +168,7 @@ export function CreateUserForm() {
                 value={values.telephone}
                 onChange={handleChange}
                 error={!!touched.telephone && !!errors.telephone}
-                helperText={touched.telephone && errors.telephone}
+                helperText={touched.telephone && errors.telephone as string}
                 fullWidth
                 variant="standard"
               />
@@ -209,7 +204,7 @@ export function CreateUserForm() {
                 label="I agree with the terms *"
               />
               {touched.userAgreement && errors.userAgreement && (
-                <p style={{ color: 'red', fontSize: 12 }}>{errors.userAgreement}</p>
+                <p style={{ color: 'red', fontSize: 12 }}>{errors.userAgreement as string}</p>
               )}
             </div>
 
@@ -217,8 +212,8 @@ export function CreateUserForm() {
               <Button type="submit" variant="contained">
                 Submit
               </Button>
-              <Button type="reset" variant="outlined">
-                Reset
+              <Button type="button" variant="outlined" onClick={onCancel}>
+                Cancel
               </Button>
             </div>
           </Form>
@@ -226,4 +221,4 @@ export function CreateUserForm() {
       </Formik>
     </div>
   );
-}
+};

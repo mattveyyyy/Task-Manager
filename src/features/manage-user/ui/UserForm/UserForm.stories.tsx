@@ -1,4 +1,4 @@
-import { CreateUserForm } from './CreateUserForm';
+import { CreateUserForm } from './UserForm';
 
 export default {
   title: 'Forms/CreateUserForm',
